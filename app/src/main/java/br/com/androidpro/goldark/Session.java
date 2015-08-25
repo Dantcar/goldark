@@ -5,6 +5,7 @@ package br.com.androidpro.goldark;
  * @version 25/08/15.
  */
 public class Session {
+    private String id;
     private String token;
 
     public String getToken() {
@@ -13,5 +14,13 @@ public class Session {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

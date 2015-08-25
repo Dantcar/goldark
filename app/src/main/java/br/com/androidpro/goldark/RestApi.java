@@ -3,7 +3,9 @@ package br.com.androidpro.goldark;
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Query;
 
 /**
  * @author Thiago Pagonha
@@ -47,10 +49,29 @@ public class RestApi implements RequestInterceptor {
     }
 
     interface AndroidPro {
+        /**
+         * Autentica o usuário
+         * @param user
+         * @param callback
+         */
         @POST("sessions")
         void authenticate(User user, Callback<Session> callback);
 
+        /**
+         * Cria um endereço novo
+         * @param endereco
+         * @param callback
+         */
         @POST("endereco")
-        void createEndereco()
+        void createEndereco(Endereco endereco, Callback<Endereco> callback);
+
+        /**
+         * Busca por um endereço que o usuário já tenha criado
+         * @param userId
+         * @param callback
+         */
+        @GET("endereco")
+        void retrieveEndereco(@Query("usuario") String userId, Callback<Endereco> callback);
+
     }
 }
