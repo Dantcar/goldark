@@ -1,4 +1,4 @@
-package br.com.androidpro.goldark;
+package br.com.androidpro.goldark.rest;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -15,8 +15,8 @@ import retrofit.http.Query;
 public class RestApi implements RequestInterceptor {
 
     private static RestApi restApi;
-    AndroidPro androidPro;
-    String sessionToken;
+    private AndroidPro androidPro;
+    private String sessionToken;
 
     private RestApi() {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -49,7 +49,7 @@ public class RestApi implements RequestInterceptor {
 
     }
 
-    interface AndroidPro {
+    public interface AndroidPro {
         /**
          * Autentica o usuário
          * @param user
@@ -74,5 +74,13 @@ public class RestApi implements RequestInterceptor {
         @GET("/endereco")
         void retrieveEndereco(@Query("usuario") String userId, Callback<Endereco> callback);
 
+    }
+
+    public AndroidPro getAndroidPro() {
+        return androidPro;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
     }
 }

@@ -1,16 +1,14 @@
-package br.com.androidpro.goldark;
+package br.com.androidpro.goldark.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -29,9 +27,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.androidpro.goldark.R;
+import br.com.androidpro.goldark.rest.RestApi;
+import br.com.androidpro.goldark.rest.Session;
+import br.com.androidpro.goldark.rest.User;
 import retrofit.Callback;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -128,11 +128,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            RestApi.getApi().androidPro.authenticate(new User(email, password), new Callback<Session>() {
+            RestApi.getApi().getAndroidPro().authenticate(new User(email, password), new Callback<Session>() {
                 @Override
                 public void success(Session session, Response response) {
                     showProgress(false);
-                    RestApi.getApi().sessionToken = session.getToken();
+                    RestApi.getApi().setSessionToken(session.getToken());
                     // -- Open new app with user id
                 }
 

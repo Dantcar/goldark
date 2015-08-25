@@ -1,4 +1,4 @@
-package br.com.androidpro.goldark;
+package br.com.androidpro.goldark.rest;
 
 /**
  * @author Thiago Pagonha
