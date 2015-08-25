@@ -8,6 +8,11 @@ public class User {
     private String username;
     private String password;
 
+    public User(String email, String password) {
+        this.username = email;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
