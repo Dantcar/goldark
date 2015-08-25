@@ -139,7 +139,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 @Override
                 public void failure(RetrofitError error) {
                     showProgress(false);
-                    mPasswordView.setError(getString(R.string.error_invalid_password));
+                    mPasswordView.setError(getString(R.string.error_wrong_password));
                 }
             });
         }
@@ -211,6 +211,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         List<String> emails = new ArrayList<String>();
+        emails.add("androidpro@androidpro.com.br");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
