@@ -34,6 +34,13 @@ public class EnderecoActivity extends ProgressActivity {
         @InjectView(R.id.save) Button saveButton;
         @InjectView(R.id.erase) Button eraseButton;
         @InjectView(R.id.rua) TextView rua;
+        @InjectView(R.id.numero) TextView numero;
+        @InjectView(R.id.complemento) TextView complemento;
+        @InjectView(R.id.bairro) TextView bairro;
+        @InjectView(R.id.cidade) TextView cidade;
+        @InjectView(R.id.pais) TextView pais;
+        @InjectView(R.id.cep) TextView cep;
+
 
         public ViewHolder(Activity activity) {
             ButterKnife.inject(this,activity);
@@ -71,17 +78,20 @@ public class EnderecoActivity extends ProgressActivity {
             @Override
             public void success(PageableResult<Endereco> enderecos, Response response) {
                 showProgress(false);
-                if(enderecos.getData().isEmpty()) {
-                    Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_LONG).show();
+                if(enderecos.getData() != null && !enderecos.getData().isEmpty()) {
+                    Endereco endereco = enderecos.getData().get(0)
+                    enderecoId = endereco.getId();
+                    populateData(endereco);
                 } else {
-                    populateData(enderecos.getData().get(0));
+                    Toast.makeText(EnderecoActivity.this,"Erro na busca do endereço",Toast.LENGTH_LONG).show();
+
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 showProgress(false);
-                Toast.makeText(EnderecoActivity.this,"Erro na busca do endereço",Toast.LENGTH_LONG).show();
+                Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -94,13 +104,13 @@ public class EnderecoActivity extends ProgressActivity {
             @Override
             public void success(Status status, Response response) {
                 showProgress(false);
-                Toast.makeText(EnderecoActivity.this,"Apagado com sucesso",Toast.LENGTH_SHORT);
+                Toast.makeText(EnderecoActivity.this, "Apagado com sucesso", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 showProgress(false);
-                Toast.makeText(EnderecoActivity.this,"Erro ao apagar",Toast.LENGTH_SHORT);
+                Toast.makeText(EnderecoActivity.this, "Erro ao apagar", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -108,7 +118,16 @@ public class EnderecoActivity extends ProgressActivity {
     private void saveOrUpdateEndereco() {
         showProgress(true);
         Endereco endereco = new Endereco();
-        endereco.setRua(viewHolder.rua.getText().toString());
+        endereco.setRua(String.valueOf(viewHolder.rua.getText()));
+        endereco.setNumero(Integer.valueOf(String.valueOf(viewHolder.numero.getText())));
+        endereco.setComplemento(String.valueOf(viewHolder.complemento.getText()));
+        endereco.setBairro(String.valueOf(viewHolder.bairro.getText()));
+        endereco.setCidade(String.valueOf(viewHolder.cidade.getText()));
+        endereco.setPais(String.valueOf(viewHolder.pais.getText()));
+        endereco.setCep(Integer.valueOf(String.valueOf(viewHolder.cep.getText())));
+
+        // -- Necessário para saber qual de qual usuário é o endereço
+        endereco.setUsuario(username);
 
         if(enderecoId!=null) {
             RestApi.getApi().getAndroidPro().updateEndereco(enderecoId,endereco, new Callback<Endereco>() {
@@ -125,8 +144,6 @@ public class EnderecoActivity extends ProgressActivity {
                 }
             });
         } else {
-            // -- Necessário para saber qual de qual usuário é o endereço
-            endereco.setUsuario(username);
             RestApi.getApi().getAndroidPro().createEndereco(endereco, new Callback<Endereco>() {
                 @Override
                 public void success(Endereco endereco, Response response) {
@@ -146,5 +163,15 @@ public class EnderecoActivity extends ProgressActivity {
 
     private void populateData(Endereco endereco) {
         viewHolder.rua.setText(endereco.getRua());
+        viewHolder.numero.setText(endereco.getNumero());
+        viewHolder.complemento.setText(endereco.getComplemento());
+        viewHolder.bairro.setText(endereco.getBairro());
+        viewHolder.cidade.setText(endereco.getCidade());
+        viewHolder.pais.setText(endereco.getPais());
+        viewHolder.cep.setText(endereco.getCep());
+    }
+
+    private void clearData() {
+        populateData(new Endereco());
     }
 }
