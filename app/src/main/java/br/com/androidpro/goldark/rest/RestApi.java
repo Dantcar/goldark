@@ -75,7 +75,7 @@ public class RestApi implements RequestInterceptor {
          * @param callback
          */
         @GET("/endereco")
-        void retrieveEndereco(@Query("usuario") String userId, Callback<Endereco> callback);
+        void retrieveEndereco(@Query("usuario") String userId, Callback<PageableResult<Endereco>> callback);
 
         /**
          * Remove um endereço que o usuário tenha inserido

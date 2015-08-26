@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import br.com.androidpro.goldark.R;
 import br.com.androidpro.goldark.rest.Endereco;
+import br.com.androidpro.goldark.rest.PageableResult;
 import br.com.androidpro.goldark.rest.RestApi;
 
 import br.com.androidpro.goldark.rest.Status;
@@ -66,17 +67,21 @@ public class EnderecoActivity extends ProgressActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
-        RestApi.getApi().getAndroidPro().retrieveEndereco(username, new Callback<Endereco>() {
+        RestApi.getApi().getAndroidPro().retrieveEndereco(username, new Callback<PageableResult<Endereco>>() {
             @Override
-            public void success(Endereco endereco, Response response) {
+            public void success(PageableResult<Endereco> enderecos, Response response) {
                 showProgress(false);
-                populateData(endereco);
+                if(enderecos.getData().isEmpty()) {
+                    Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_LONG).show();
+                } else {
+                    populateData(enderecos.getData().get(0));
+                }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 showProgress(false);
-                Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_LONG).show();
+                Toast.makeText(EnderecoActivity.this,"Erro na busca do endereço",Toast.LENGTH_LONG).show();
             }
         });
 
