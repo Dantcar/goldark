@@ -79,7 +79,7 @@ public class EnderecoActivity extends ProgressActivity {
             public void success(PageableResult<Endereco> enderecos, Response response) {
                 showProgress(false);
                 if(enderecos.getData() != null && !enderecos.getData().isEmpty()) {
-                    Endereco endereco = enderecos.getData().get(0)
+                    Endereco endereco = enderecos.getData().get(0);
                     enderecoId = endereco.getId();
                     populateData(endereco);
                 } else {
@@ -103,6 +103,8 @@ public class EnderecoActivity extends ProgressActivity {
         RestApi.getApi().getAndroidPro().eraseEndereco(enderecoId, new Callback<Status>() {
             @Override
             public void success(Status status, Response response) {
+                clearData();
+                enderecoId = null;
                 showProgress(false);
                 Toast.makeText(EnderecoActivity.this, "Apagado com sucesso", Toast.LENGTH_LONG).show();
             }
@@ -163,12 +165,19 @@ public class EnderecoActivity extends ProgressActivity {
 
     private void populateData(Endereco endereco) {
         viewHolder.rua.setText(endereco.getRua());
-        viewHolder.numero.setText(endereco.getNumero());
+        viewHolder.numero.setText(number(endereco.getNumero()));
         viewHolder.complemento.setText(endereco.getComplemento());
         viewHolder.bairro.setText(endereco.getBairro());
         viewHolder.cidade.setText(endereco.getCidade());
         viewHolder.pais.setText(endereco.getPais());
-        viewHolder.cep.setText(endereco.getCep());
+        viewHolder.cep.setText(number(endereco.getCep()));
+    }
+
+    private String number(Integer numero) {
+        if(numero==null) {
+            return "";
+        }
+        return String.valueOf(numero);
     }
 
     private void clearData() {
