@@ -16,7 +16,7 @@
         <LinearLayout android:id="@+id/endereco_form" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
 
-            <EditView android:id="@+id/rua" android:layout_width="match_parent"
+            <EditText android:id="@+id/rua" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="rua"
                 android:inputType="text" android:maxLines="1"
                 android:singleLine="true" />
@@ -26,27 +26,27 @@
                 android:inputType="number"
                 android:maxLines="1" android:singleLine="true" />
 
-            <EditView android:id="@+id/complemento" android:layout_width="match_parent"
+            <EditText android:id="@+id/complemento" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="complemento"
                 android:inputType="text" android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditView android:id="@+id/bairro" android:layout_width="match_parent"
+            <EditText android:id="@+id/bairro" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="bairro"
                 android:inputType="text" android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditView android:id="@+id/cidade" android:layout_width="match_parent"
+            <EditText android:id="@+id/cidade" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="cidade"
                 android:inputType="text" android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditView android:id="@+id/pais" android:layout_width="match_parent"
+            <EditText android:id="@+id/pais" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="país"
                 android:inputType="text" android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditView android:id="@+id/cep" android:layout_width="match_parent"
+            <EditText android:id="@+id/cep" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="cep"
                 android:inputType="number" android:maxLines="1"
                 android:singleLine="true" />
