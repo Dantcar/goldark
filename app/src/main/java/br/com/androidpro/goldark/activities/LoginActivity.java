@@ -48,8 +48,9 @@ public class LoginActivity extends ProgressActivity implements LoaderCallbacks<C
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_endereco);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);

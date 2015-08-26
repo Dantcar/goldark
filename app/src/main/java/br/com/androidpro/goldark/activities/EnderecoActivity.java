@@ -43,8 +43,8 @@ public class EnderecoActivity extends ProgressActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endereco);
+        super.onCreate(savedInstanceState);
         showProgress(true);
 
         viewHolder = new ViewHolder(this);
