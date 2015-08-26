@@ -48,7 +48,7 @@ public class LoginActivity extends ProgressActivity implements LoaderCallbacks<C
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_endereco);
+        setContentView(R.layout.activity_login);
         super.onCreate(savedInstanceState);
 
 
@@ -140,7 +140,7 @@ public class LoginActivity extends ProgressActivity implements LoaderCallbacks<C
                     showProgress(false);
                     RestApi.getApi().setSessionToken(session.getToken());
                     Intent intent = new Intent(LoginActivity.this, EnderecoActivity.class);
-                    intent.putExtra(EXTRA_MESSAGE,session.getId());
+                    intent.putExtra(EXTRA_MESSAGE,session.getUsername());
                     startActivity(intent);
                 }
 

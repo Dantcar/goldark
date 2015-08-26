@@ -26,7 +26,7 @@ import butterknife.InjectView;
 public class EnderecoActivity extends ProgressActivity {
 
     private String enderecoId;
-    private String usuarioId;
+    private String username;
 
     static class ViewHolder {
 
@@ -64,9 +64,9 @@ public class EnderecoActivity extends ProgressActivity {
         });
 
         Intent intent = getIntent();
-        usuarioId = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
+        username = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
-        RestApi.getApi().getAndroidPro().retrieveEndereco(usuarioId, new Callback<Endereco>() {
+        RestApi.getApi().getAndroidPro().retrieveEndereco(username, new Callback<Endereco>() {
             @Override
             public void success(Endereco endereco, Response response) {
                 showProgress(false);
@@ -76,7 +76,7 @@ public class EnderecoActivity extends ProgressActivity {
             @Override
             public void failure(RetrofitError error) {
                 showProgress(false);
-                Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_SHORT);
+                Toast.makeText(EnderecoActivity.this,"Não existe endereço cadastrado, insira um por gentileza",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -110,30 +110,30 @@ public class EnderecoActivity extends ProgressActivity {
                 @Override
                 public void success(Endereco endereco, Response response) {
                     showProgress(false);
-                    Toast.makeText(EnderecoActivity.this,"Atualizado com sucesso",Toast.LENGTH_SHORT);
+                    Toast.makeText(EnderecoActivity.this,"Atualizado com sucesso",Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     showProgress(false);
-                    Toast.makeText(EnderecoActivity.this, "Erro na atualização", Toast.LENGTH_SHORT);
+                    Toast.makeText(EnderecoActivity.this, "Erro na atualização",Toast.LENGTH_LONG).show();
                 }
             });
         } else {
             // -- Necessário para saber qual de qual usuário é o endereço
-            endereco.setUsuario(usuarioId);
+            endereco.setUsuario(username);
             RestApi.getApi().getAndroidPro().createEndereco(endereco, new Callback<Endereco>() {
                 @Override
                 public void success(Endereco endereco, Response response) {
                     showProgress(false);
                     enderecoId = endereco.getId();
-                    Toast.makeText(EnderecoActivity.this,"Criado com sucesso",Toast.LENGTH_SHORT);
+                    Toast.makeText(EnderecoActivity.this,"Criado com sucesso",Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     showProgress(false);
-                    Toast.makeText(EnderecoActivity.this, "Erro na criação", Toast.LENGTH_SHORT);
+                    Toast.makeText(EnderecoActivity.this, "Erro na criação",Toast.LENGTH_LONG).show();
                 }
             });
         }
