@@ -23,6 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activities.EnderecoActivity"
+            android:label="@string/endereco"
+            android:parentActivityName=".activities.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.LoginActivity"/>
+        </activity>
+
+
     </application>
 
 </manifest>

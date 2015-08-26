@@ -5,6 +5,8 @@ package br.com.androidpro.goldark.rest;
  * @version 25/08/15.
  */
 public class Endereco {
+
+    private String id;
     private String rua;
     private Integer numero;
     private String complemento;
@@ -12,6 +14,7 @@ public class Endereco {
     private String cidade;
     private String pais;
     private Integer cep;
+    private String usuario;
 
     public String getRua() {
         return rua;
@@ -67,5 +70,21 @@ public class Endereco {
 
     public void setCep(Integer cep) {
         this.cep = cep;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

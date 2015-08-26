@@ -4,8 +4,11 @@ import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -73,6 +76,22 @@ public class RestApi implements RequestInterceptor {
          */
         @GET("/endereco")
         void retrieveEndereco(@Query("usuario") String userId, Callback<Endereco> callback);
+
+        /**
+         * Remove um endereço que o usuário tenha inserido
+         * @param id
+         */
+        @DELETE("/endereco/{id}")
+        void eraseEndereco(@Path("id") String id, Callback<Status> callback);
+
+        /**
+         * Atualiza um endereço que já estava previamente salvo
+         * @param id
+         * @param endereco
+         * @param callback
+         */
+        @PUT("/endereco/{id}")
+        void updateEndereco(@Path("id") String id, @Body Endereco endereco, Callback<Endereco> callback);
 
     }
 
